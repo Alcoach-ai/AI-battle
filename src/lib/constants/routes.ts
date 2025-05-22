@@ -10,6 +10,7 @@ export const ROUTES = {
 		PRIVACY: '/privacy'
 	},
 	COMPETITIONS: '/competitions',
+	COMPETITION: (id: string) => `/competitions/${id}`,
 	LEARNING: '/learning',
 	FORUM: '/forum',
 	FAQ: '/faq',

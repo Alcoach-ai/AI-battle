@@ -29,8 +29,11 @@
 	<section class="hero">
 		<div class="hero-content">
 			<div class="hero-text">
-				<h1>Начни учиться<br>с <span class="brand">RLArena</span></h1>
-				<p>Решайте задачи, участвуйте в обсуждениях, проходите курсы и достигайте новых высот в мире ИИ!</p>
+				<h1>Начни учиться<br />с <span class="brand">RLArena</span></h1>
+				<p>
+					Решайте задачи, участвуйте в обсуждениях, проходите курсы и достигайте новых высот в мире
+					ИИ!
+				</p>
 				<a href={ROUTES.START} class="cta-button">Начать</a>
 			</div>
 			<div class="hero-image">
@@ -45,8 +48,13 @@
 				<img src="/images/robot-illustration.svg" alt="Robot illustration" />
 			</div>
 			<div class="for-whom-text">
-				<h2>Кому подойдет<br>RLArena</h2>
-				<p>RLArena — это платформа для всех, кто стремится к мастерству в машинном обучении. Здесь студенты могут обучаться и участвовать в соревнованиях, преподаватели — создавать задания и курсы, а все желающие — развиваться и делиться знаниями. Присоединяйтесь к нашему сообществу и достигайте новых высот в мире машинного обучения!</p>
+				<h2>Кому подойдет<br />RLArena</h2>
+				<p>
+					RLArena — это платформа для всех, кто стремится к мастерству в машинном обучении. Здесь
+					студенты могут обучаться и участвовать в соревнованиях, преподаватели — создавать задания
+					и курсы, а все желающие — развиваться и делиться знаниями. Присоединяйтесь к нашему
+					сообществу и достигайте новых высот в мире машинного обучения!
+				</p>
 			</div>
 		</div>
 	</section>
@@ -54,7 +62,7 @@
 
 <style>
 	main {
-		background-color: #EBF8FF;
+		background-color: #ebf8ff;
 	}
 
 	.hero {
@@ -76,18 +84,18 @@
 
 	.hero-text h1 {
 		font-size: 3.5rem;
-		color: #1A202C;
+		color: #1a202c;
 		margin-bottom: 1.5rem;
 		line-height: 1.2;
 	}
 
 	.brand {
-		color: #4299E1;
+		color: #4299e1;
 	}
 
 	.hero-text p {
 		font-size: 1.25rem;
-		color: #4A5568;
+		color: #4a5568;
 		margin-bottom: 2rem;
 		line-height: 1.6;
 	}
@@ -103,7 +111,7 @@
 	}
 
 	.cta-button:hover {
-		background: #1A202C;
+		background: #1a202c;
 	}
 
 	.hero-image {
@@ -144,19 +152,20 @@
 
 	.for-whom-text h2 {
 		font-size: 2.5rem;
-		color: #1A202C;
+		color: #1a202c;
 		margin-bottom: 1.5rem;
 		line-height: 1.2;
 	}
 
 	.for-whom-text p {
 		font-size: 1.1rem;
-		color: #4A5568;
+		color: #4a5568;
 		line-height: 1.6;
 	}
 
 	@media (max-width: 768px) {
-		.hero-content, .for-whom-content {
+		.hero-content,
+		.for-whom-content {
 			flex-direction: column;
 			text-align: center;
 			gap: 2rem;
@@ -172,8 +181,8 @@
 		top: 1rem;
 		left: 50%;
 		transform: translateX(-50%);
-		background: #FEE2E2;
-		color: #991B1B;
+		background: #fee2e2;
+		color: #991b1b;
 		padding: 1rem 2rem;
 		border-radius: 0.5rem;
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

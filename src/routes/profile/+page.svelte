@@ -6,16 +6,12 @@
 <main>
 	<div class="profile-container">
 		<div class="profile-header">
-			<div class="profile-avatar">
-				👤
-			</div>
+			<div class="profile-avatar">👤</div>
 			<div class="profile-info">
 				<h1>{$userStore?.name || 'Пользователь'}</h1>
 				<p class="email">{$userStore?.email || 'email@example.com'}</p>
 			</div>
-			<button class="logout-button" on:click={authUtils.logout}>
-				Выйти
-			</button>
+			<button class="logout-button" on:click={authUtils.logout}> Выйти </button>
 		</div>
 
 		<div class="profile-stats">
@@ -38,7 +34,7 @@
 				<h2>Достижения</h2>
 				<div class="achievements-grid">
 					{#if $userStore?.achievements?.length}
-						{#each $userStore.achievements as achievement}
+						{#each $userStore.achievements as achievement (achievement.title)}
 							<div class="achievement-card">
 								<span class="achievement-icon">🏆</span>
 								<h4>{achievement.title}</h4>
@@ -55,7 +51,7 @@
 				<h2>Последняя активность</h2>
 				<div class="activity-list">
 					{#if $userStore?.recentActivity?.length}
-						{#each $userStore.recentActivity as activity}
+						{#each $userStore.recentActivity as activity (activity.date + activity.description)}
 							<div class="activity-item">
 								<span class="activity-date">{activity.date}</span>
 								<p>{activity.description}</p>
@@ -72,7 +68,7 @@
 
 <style>
 	main {
-		background-color: #EBF8FF;
+		background-color: #ebf8ff;
 		min-height: 100vh;
 		padding: 2rem 0;
 	}
@@ -96,7 +92,7 @@
 
 	.profile-avatar {
 		font-size: 4rem;
-		background: #EBF8FF;
+		background: #ebf8ff;
 		width: 100px;
 		height: 100px;
 		display: flex;
@@ -107,12 +103,12 @@
 
 	.profile-info h1 {
 		font-size: 2rem;
-		color: #1A202C;
+		color: #1a202c;
 		margin-bottom: 0.5rem;
 	}
 
 	.email {
-		color: #4A5568;
+		color: #4a5568;
 		font-size: 1.1rem;
 	}
 
@@ -132,14 +128,14 @@
 	}
 
 	.stat-card h3 {
-		color: #4A5568;
+		color: #4a5568;
 		margin-bottom: 0.5rem;
 		font-size: 1.1rem;
 	}
 
 	.stat-value {
 		font-size: 2rem;
-		color: #2B6CB0;
+		color: #2b6cb0;
 		font-weight: bold;
 	}
 
@@ -148,7 +144,8 @@
 		gap: 2rem;
 	}
 
-	.achievements, .recent-activity {
+	.achievements,
+	.recent-activity {
 		background: white;
 		padding: 2rem;
 		border-radius: 1rem;
@@ -156,7 +153,7 @@
 	}
 
 	h2 {
-		color: #1A202C;
+		color: #1a202c;
 		margin-bottom: 1.5rem;
 		font-size: 1.5rem;
 	}
@@ -168,7 +165,7 @@
 	}
 
 	.achievement-card {
-		background: #EBF8FF;
+		background: #ebf8ff;
 		padding: 1.5rem;
 		border-radius: 0.5rem;
 		text-align: center;
@@ -181,12 +178,12 @@
 	}
 
 	.achievement-card h4 {
-		color: #2B6CB0;
+		color: #2b6cb0;
 		margin-bottom: 0.5rem;
 	}
 
 	.achievement-card p {
-		color: #4A5568;
+		color: #4a5568;
 		font-size: 0.9rem;
 	}
 
@@ -199,21 +196,21 @@
 	.activity-item {
 		padding: 1rem;
 		border-radius: 0.5rem;
-		background: #EBF8FF;
+		background: #ebf8ff;
 	}
 
 	.activity-date {
-		color: #4A5568;
+		color: #4a5568;
 		font-size: 0.9rem;
 	}
 
 	.activity-item p {
-		color: #1A202C;
+		color: #1a202c;
 		margin-top: 0.25rem;
 	}
 
 	.empty-state {
-		color: #4A5568;
+		color: #4a5568;
 		text-align: center;
 		padding: 2rem;
 	}

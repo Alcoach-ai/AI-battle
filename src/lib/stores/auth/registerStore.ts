@@ -3,9 +3,9 @@ import { goto } from '$app/navigation';
 import { z } from 'zod';
 import { ROUTES } from '$lib/constants/routes';
 import { userStore } from '../user/userStore';
-import type { User } from '../user/types';
 import type { RegisterFormState, ValidationError } from './types';
 import { registerSchema } from './schemas';
+import { apiClient } from '$lib/api';
 
 function mapZodErrorToValidationErrors(error: z.ZodError): ValidationError[] {
 	return error.errors.map((err) => ({
@@ -173,22 +173,29 @@ function createRegisterStore(): RegisterStore {
 			if (!validatedData) return;
 
 			try {
-				// TODO: Implement actual API calls here
-				await new Promise((resolve) => setTimeout(resolve, 1000));
-
-				const userData: User = {
+				// Используем API клиент для регистрации
+				const response = await apiClient.register({
 					name: validatedData.name,
 					email: validatedData.email,
-					isAuthenticated: true,
-					rating: 0,
-					solvedTasks: 0,
-					competitions: 0,
-					achievements: [],
-					recentActivity: []
-				};
+					password: validatedData.password,
+					termsAccepted: validatedData.termsAccepted
+				});
 
-				userStore.setUser(userData);
+				if (!response.success || !response.data) {
+					const errorMessage = response.error?.message || 'Произошла ошибка при регистрации';
+					update((state) => ({
+						...state,
+						isLoading: false,
+						error: errorMessage
+					}));
+					return;
+				}
+
+				// Сохраняем данные пользователя
+				userStore.setUser(response.data.user);
 				update((state) => ({ ...state, isLoading: false }));
+
+				// Перенаправляем на главную страницу
 				await goto(ROUTES.HOME);
 			} catch (error) {
 				const errorMessage =
@@ -205,4 +212,4 @@ function createRegisterStore(): RegisterStore {
 	return store;
 }
 
-export const registerStore = createRegisterStore(); 
+export const registerStore = createRegisterStore();

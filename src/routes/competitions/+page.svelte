@@ -49,8 +49,19 @@
 	</header>
 
 	<div class="competitions-grid">
-		{#each competitions as competition}
-			<div class="competition-card" on:click={() => handleCompetitionClick(competition.id)}>
+		{#each competitions as competition (competition.id)}
+			<div
+				class="competition-card"
+				role="button"
+				tabindex="0"
+				on:click={() => handleCompetitionClick(competition.id)}
+				on:keydown={(e) => {
+					if (e.key === 'Enter' || e.key === ' ') {
+						e.preventDefault();
+						handleCompetitionClick(competition.id);
+					}
+				}}
+			>
 				<div class="card-header">
 					<img src={competition.logo} alt={`${competition.title} logo`} class="competition-logo" />
 					<div class="date-range">
@@ -109,6 +120,12 @@
 
 	.competition-card:hover {
 		transform: translateY(-4px);
+	}
+
+	.competition-card:focus {
+		transform: translateY(-4px);
+		outline: 2px solid #4299e1;
+		outline-offset: 2px;
 	}
 
 	.card-header {

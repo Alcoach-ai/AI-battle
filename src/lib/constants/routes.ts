@@ -16,7 +16,7 @@ export const ROUTES = {
 	FAQ: '/faq',
 	CONTACTS: '/contacts',
 	PROFILE: '/profile',
-	START: '/start',
+	START: '/start'
 } as const;
 
 export type AppRoute = (typeof ROUTES)[keyof typeof ROUTES];

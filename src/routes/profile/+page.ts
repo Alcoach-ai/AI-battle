@@ -5,11 +5,11 @@ import { userStore } from '$lib/stores/user';
 import { ROUTES } from '$lib/constants/routes';
 
 export const load: PageLoad = () => {
-    const user = get(userStore);
-    
-    if (!user.isAuthenticated) {
-        throw redirect(303, `${ROUTES.AUTH.LOGIN}?returnUrl=${ROUTES.PROFILE}`);
-    }
+	const user = get(userStore);
 
-    return {};
-}; 
+	if (!user.isAuthenticated) {
+		throw redirect(303, `${ROUTES.AUTH.LOGIN}?returnUrl=${ROUTES.PROFILE}`);
+	}
+
+	return {};
+};

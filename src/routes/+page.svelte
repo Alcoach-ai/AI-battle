@@ -1,10 +1,9 @@
 <script lang="ts">
-	import { authStore } from '$lib/stores/auth';
-	import { userStore } from '$lib/stores/user';
 	import { ROUTES } from '$lib/constants/routes';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
+	import Header from '$lib/components/Header.svelte';
 
 	let showError = false;
 	let errorMessage = '';
@@ -27,21 +26,7 @@
 	</div>
 {/if}
 
-<nav class="navigation">
-	<div class="nav-content">
-		<div class="nav-logo">★</div>
-		<div class="nav-links">
-			<a href={ROUTES.COMPETITIONS}>Соревнования</a>
-			<a href={ROUTES.LEARNING}>Обучение</a>
-			<a href={ROUTES.FORUM}>Форум</a>
-			<a href={ROUTES.FAQ}>FAQ</a>
-			<a href={ROUTES.CONTACTS}>Контакты</a>
-		</div>
-		<div class="nav-profile">
-			<a href={ROUTES.PROFILE}>👤</a>
-		</div>
-	</div>
-</nav>
+<Header />
 
 <main>
 	<section class="hero">
@@ -71,40 +56,6 @@
 </main>
 
 <style>
-	.navigation {
-		background: white;
-		padding: 1rem 0;
-		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	}
-
-	.nav-content {
-		max-width: 1200px;
-		margin: 0uto;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		padding: 0 2rem;
-	}
-
-	.nav-logo {
-		font-size: 1.5rem;
-	}
-
-	.nav-links {
-		display: flex;
-		gap: 2rem;
-	}
-
-	.nav-links a {
-		color: #4A5568;
-		text-decoration: none;
-		font-size: 1rem;
-	}
-
-	.nav-links a:hover {
-		color: #2B6CB0;
-	}
-
 	main {
 		background-color: #EBF8FF;
 	}
@@ -216,10 +167,6 @@
 
 		.hero-text h1 {
 			font-size: 2.5rem;
-		}
-
-		.nav-links {
-			display: none;
 		}
 	}
 

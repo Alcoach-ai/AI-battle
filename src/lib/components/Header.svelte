@@ -5,7 +5,10 @@
 
 <nav class="navigation">
 	<div class="nav-content">
-		<div class="nav-logo">★</div>
+		<a href={ROUTES.HOME} class="nav-logo">
+			<span class="logo-icon">★</span>
+			<span class="logo-text">AI Battle</span>
+		</a>
 		<div class="nav-links">
 			<a href={ROUTES.COMPETITIONS}>Соревнования</a>
 			<a href={ROUTES.LEARNING}>Обучение</a>
@@ -45,7 +48,26 @@
 	}
 
 	.nav-logo {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		text-decoration: none;
+		color: inherit;
+		transition: opacity 0.2s;
+	}
+
+	.nav-logo:hover {
+		opacity: 0.7;
+	}
+
+	.logo-icon {
 		font-size: 1.5rem;
+	}
+
+	.logo-text {
+		font-size: 1.2rem;
+		font-weight: 600;
+		color: #1a202c;
 	}
 
 	.nav-links {
@@ -111,6 +133,10 @@
 		.profile-name {
 			max-width: 80px;
 			font-size: 0.8rem;
+		}
+
+		.logo-text {
+			font-size: 1rem;
 		}
 	}
 </style>

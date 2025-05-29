@@ -3,7 +3,6 @@
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
-	import Header from '$lib/components/Header.svelte';
 
 	let showError = false;
 	let errorMessage = '';
@@ -25,8 +24,6 @@
 		{errorMessage}
 	</div>
 {/if}
-
-<Header />
 
 <main>
 	<section class="hero">

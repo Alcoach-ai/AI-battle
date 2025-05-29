@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { authStore } from '$lib/stores/auth';
+    import { loginStore } from '$lib/stores/auth';
     import { ROUTES } from '$lib/constants/routes';
 
-    $: emailError = $authStore.validationErrors.find(err => err.path[0] === 'email')?.message;
-    $: passwordError = $authStore.validationErrors.find(err => err.path[0] === 'password')?.message;
+    $: emailError = $loginStore.validationErrors.find(err => err.path[0] === 'email')?.message;
+    $: passwordError = $loginStore.validationErrors.find(err => err.path[0] === 'password')?.message;
 </script>
 
 <div class="auth-container">
@@ -20,18 +20,18 @@
             <h2>Войдите в аккаунт</h2>
             <p class="subtitle">Рады видеть вас снова</p>
 
-            <form on:submit|preventDefault={authStore.handleLogin} class="auth-form">
+            <form on:submit|preventDefault={loginStore.handleLogin} class="auth-form">
                 <div class="form-group">
                     <label for="email">Электронная почта</label>
                     <input
                         type="email"
                         id="email"
                         class:error={emailError}
-                        value={$authStore.email}
-                        on:input={(e) => authStore.setEmail(e.currentTarget.value)}
+                        value={$loginStore.email}
+                        on:input={(e) => loginStore.setEmail(e.currentTarget.value)}
                         required
                         placeholder="Введите ваш e-mail"
-                        disabled={$authStore.isLoading}
+                        disabled={$loginStore.isLoading}
                     />
                     {#if emailError}
                         <span class="error-message">{emailError}</span>
@@ -44,11 +44,11 @@
                         type="password"
                         id="password"
                         class:error={passwordError}
-                        value={$authStore.password}
-                        on:input={(e) => authStore.setPassword(e.currentTarget.value)}
+                        value={$loginStore.password}
+                        on:input={(e) => loginStore.setPassword(e.currentTarget.value)}
                         required
                         placeholder="Введите ваш пароль"
-                        disabled={$authStore.isLoading}
+                        disabled={$loginStore.isLoading}
                     />
                     {#if passwordError}
                         <span class="error-message">{passwordError}</span>
@@ -56,18 +56,18 @@
                     <a href={ROUTES.AUTH.RESET_PASSWORD} class="forgot-password">Забыли пароль?</a>
                 </div>
 
-                {#if $authStore.error}
+                {#if $loginStore.error}
                     <div class="error-message form-error">
-                        {$authStore.error}
+                        {$loginStore.error}
                     </div>
                 {/if}
 
                 <button 
                     type="submit" 
                     class="submit-button" 
-                    disabled={$authStore.isLoading}
+                    disabled={$loginStore.isLoading}
                 >
-                    {$authStore.isLoading ? 'Загрузка...' : 'Войти'}
+                    {$loginStore.isLoading ? 'Загрузка...' : 'Войти'}
                 </button>
 
                 <p class="toggle-auth">

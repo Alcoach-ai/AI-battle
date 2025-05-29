@@ -1,5 +1,7 @@
-export { authStore } from './authStore';
+export { loginStore } from './loginStore';
+export { registerStore } from './registerStore';
+export { authUtils } from './authUtils';
 
-export type { User, AuthFormState, ValidationError } from './types';
+export type { LoginFormState, RegisterFormState, ValidationError } from './types';
 
 export { nameSchema, passwordSchema, registerSchema, loginSchema } from './schemas';

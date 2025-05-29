@@ -3,13 +3,15 @@ export type ValidationError = {
     message: string;
 }
 
-export interface User {
-    name: string;
+export interface LoginFormState {
     email: string;
-    isAuthenticated: boolean;
+    password: string;
+    isLoading: boolean;
+    error: string | null;
+    validationErrors: ValidationError[];
 }
 
-export interface AuthFormState {
+export interface RegisterFormState {
     name: string;
     email: string;
     password: string;

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { userStore } from '$lib/stores/user';
+	import { authUtils } from '$lib/stores/auth';
 </script>
 
 <main>
@@ -12,6 +13,9 @@
 				<h1>{$userStore?.name || 'Пользователь'}</h1>
 				<p class="email">{$userStore?.email || 'email@example.com'}</p>
 			</div>
+			<button class="logout-button" on:click={authUtils.logout}>
+				Выйти
+			</button>
 		</div>
 
 		<div class="profile-stats">
@@ -214,10 +218,36 @@
 		padding: 2rem;
 	}
 
+	.logout-button {
+		margin-left: auto;
+		background-color: #e53e3e;
+		color: white;
+		border: none;
+		padding: 0.75rem 1.5rem;
+		border-radius: 0.5rem;
+		font-size: 1rem;
+		cursor: pointer;
+		transition: background-color 0.2s;
+	}
+
+	.logout-button:hover {
+		background-color: #c53030;
+	}
+
+	.logout-button:active {
+		background-color: #9c1c1c;
+	}
+
 	@media (max-width: 768px) {
 		.profile-header {
 			flex-direction: column;
 			text-align: center;
+		}
+
+		.logout-button {
+			margin-left: 0;
+			margin-top: 1rem;
+			width: 100%;
 		}
 
 		.profile-stats {

@@ -1,11 +1,11 @@
 <script lang="ts">
-    import { authStore } from '$lib/stores/auth';
+    import { registerStore } from '$lib/stores/auth';
     import { ROUTES } from '$lib/constants/routes';
 
-    $: nameError = $authStore.validationErrors.find(err => err.path[0] === 'name')?.message;
-    $: emailError = $authStore.validationErrors.find(err => err.path[0] === 'email')?.message;
-    $: passwordErrors = $authStore.validationErrors.filter(err => err.path[0] === 'password');
-    $: termsError = $authStore.validationErrors.find(err => err.path[0] === 'termsAccepted')?.message;
+    $: nameError = $registerStore.validationErrors.find(err => err.path[0] === 'name')?.message;
+    $: emailError = $registerStore.validationErrors.find(err => err.path[0] === 'email')?.message;
+    $: passwordErrors = $registerStore.validationErrors.filter(err => err.path[0] === 'password');
+    $: termsError = $registerStore.validationErrors.find(err => err.path[0] === 'termsAccepted')?.message;
 </script>
 
 <div class="auth-container">
@@ -22,18 +22,18 @@
             <h2>Создайте свой аккаунт</h2>
             <p class="subtitle">Это просто и легко</p>
 
-            <form on:submit|preventDefault={authStore.handleRegister} class="auth-form">
+            <form on:submit|preventDefault={registerStore.handleRegister} class="auth-form">
                 <div class="form-group">
                     <label for="name">ФИО</label>
                     <input
                         type="text"
                         id="name"
                         class:error={nameError}
-                        value={$authStore.name}
-                        on:input={(e) => authStore.setName(e.currentTarget.value)}
+                        value={$registerStore.name}
+                        on:input={(e) => registerStore.setName(e.currentTarget.value)}
                         required
                         placeholder="Иванов Иван Иванович"
-                        disabled={$authStore.isLoading}
+                        disabled={$registerStore.isLoading}
                     />
                     {#if nameError}
                         <span class="error-message">{nameError}</span>
@@ -50,11 +50,11 @@
                         type="email"
                         id="email"
                         class:error={emailError}
-                        value={$authStore.email}
-                        on:input={(e) => authStore.setEmail(e.currentTarget.value)}
+                        value={$registerStore.email}
+                        on:input={(e) => registerStore.setEmail(e.currentTarget.value)}
                         required
                         placeholder="Введите ваш e-mail"
-                        disabled={$authStore.isLoading}
+                        disabled={$registerStore.isLoading}
                     />
                     {#if emailError}
                         <span class="error-message">{emailError}</span>
@@ -67,11 +67,11 @@
                         type="password"
                         id="password"
                         class:error={passwordErrors.length > 0}
-                        value={$authStore.password}
-                        on:input={(e) => authStore.setPassword(e.currentTarget.value)}
+                        value={$registerStore.password}
+                        on:input={(e) => registerStore.setPassword(e.currentTarget.value)}
                         required
                         placeholder="Введите ваш пароль"
-                        disabled={$authStore.isLoading}
+                        disabled={$registerStore.isLoading}
                     />
                     {#if passwordErrors.length > 0}
                         <div class="password-requirements">
@@ -82,9 +82,9 @@
                     {/if}
                 </div>
 
-                {#if $authStore.error}
+                {#if $registerStore.error}
                     <div class="error-message form-error">
-                        {$authStore.error}
+                        {$registerStore.error}
                     </div>
                 {/if}
 
@@ -93,8 +93,8 @@
                         <input
                             type="checkbox"
                             class:error={termsError}
-                            checked={$authStore.termsAccepted}
-                            on:change={(e) => authStore.setTermsAccepted(e.currentTarget.checked)}
+                            checked={$registerStore.termsAccepted}
+                            on:change={(e) => registerStore.setTermsAccepted(e.currentTarget.checked)}
                             required
                         />
                         <span>
@@ -111,9 +111,9 @@
                 <button 
                     type="submit" 
                     class="submit-button" 
-                    disabled={$authStore.isLoading || !$authStore.termsAccepted}
+                    disabled={$registerStore.isLoading || !$registerStore.termsAccepted}
                 >
-                    {$authStore.isLoading ? 'Загрузка...' : 'Зарегистрироваться'}
+                    {$registerStore.isLoading ? 'Загрузка...' : 'Зарегистрироваться'}
                 </button>
 
                 <p class="toggle-auth">

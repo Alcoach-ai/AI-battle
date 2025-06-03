@@ -72,7 +72,9 @@
 					<div class="date-range">{competition?.startDate} - {competition?.endDate}</div>
 				</div>
 			</div>
-			<button class="participate-btn">Участвовать</button>
+			<button class="participate-btn" on:click={() => { if (competition) window.location.href = `/competitions/${competition.id}/participate`; }}>
+				Участвовать
+			</button>
 		</header>
 
 		<section class="competition-description">

@@ -51,7 +51,7 @@ class ApiClient {
 	private baseUrl: string;
 	private useMockServer: boolean;
 
-	constructor(baseUrl: string = '', useMockServer: boolean = true) {
+	constructor(baseUrl: string = "http://localhost:8080", useMockServer: boolean = true) {
 		this.baseUrl = baseUrl;
 		this.useMockServer = useMockServer;
 	}
@@ -125,7 +125,7 @@ class ApiClient {
 					}
 					break;
 
-				case '/api/auth/register':
+				case '/api/users':
 					if (config.method === 'POST') {
 						return (await mockApiHandlers.register(
 							config.body as RegisterRequest
@@ -199,7 +199,7 @@ class ApiClient {
 	}
 
 	async register(userData: RegisterRequest): Promise<ApiResponse<AuthResponse>> {
-		const response = await this.makeRequest<AuthResponse>('/api/auth/register', {
+		const response = await this.makeRequest<AuthResponse>('/api/users', {
 			method: 'POST',
 			body: userData
 		});
@@ -259,7 +259,7 @@ class ApiClient {
 }
 
 // Создаем экземпляр API клиента
-export const apiClient = new ApiClient('', true); // useMockServer = true
+export const apiClient = new ApiClient('http://localhost:8080', true); // useMockServer = true
 
 // Экспортируем TokenManager для использования в других модулях
 export { TokenManager };

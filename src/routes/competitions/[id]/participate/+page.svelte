@@ -24,10 +24,10 @@
     error = '';
     try {
       competition = await getContest(slug);
-      status = competition.status;
-      isEntered = (await isUserEntered(slug)).is_entered;
+      status = (competition as any).status;
+      isEntered = (await isUserEntered(slug) as any).is_entered;
       if (isEntered) {
-        submissions = (await getContestSubmissions(slug)).submissions || [];
+        submissions = ((await getContestSubmissions(slug) as any).submissions) || [];
       } else {
         submissions = [];
       }

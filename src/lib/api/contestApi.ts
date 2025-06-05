@@ -1,6 +1,8 @@
 // API-клиент для работы с соревнованиями
 
-const API_URL = 'http://localhost/api/v1';
+import { apiClient } from './client';
+
+const API_URL = 'http://localhost:80';
 
 // Получить JWT токен из localStorage (или другого хранилища)
 function getToken() {
@@ -13,35 +15,30 @@ function authHeaders(): Record<string, string> {
 }
 
 export async function getContest(slug: string) {
-  const res = await fetch(`${API_URL}/contests/${slug}`);
-  if (!res.ok) throw new Error('Ошибка получения соревнования');
-  return res.json();
+  const res = await apiClient.request(`/api/v1/contests/${slug}`);
+  if (!res.success) throw new Error(res.error?.message || 'Ошибка получения соревнования');
+  return res.data;
 }
 
 export async function getContestSubmissions(slug: string) {
-  const res = await fetch(`${API_URL}/contests/${slug}/submissions`, {
-    headers: authHeaders(),
-  });
-  if (!res.ok) throw new Error('Ошибка получения сабмитов');
-  return res.json();
+  const res = await apiClient.request(`/api/v1/contests/${slug}/submissions`);
+  if (!res.success) throw new Error(res.error?.message || 'Ошибка получения сабмитов');
+  return res.data;
 }
 
 export async function isUserEntered(slug: string) {
-  const res = await fetch(`${API_URL}/contests/${slug}/is_user_entered`, {
-    headers: authHeaders(),
-  });
-  if (!res.ok) throw new Error('Ошибка проверки регистрации');
-  return res.json();
+  const res = await apiClient.request(`/api/v1/contests/${slug}/is_user_entered`);
+  if (!res.success) throw new Error(res.error?.message || 'Ошибка проверки регистрации');
+  return res.data;
 }
 
 export async function enterContest(slug: string) {
-  const headers: Record<string, string> = { 'Content-Type': 'application/json', ...authHeaders() };
-  const res = await fetch(`${API_URL}/contests/${slug}/enter`, {
+  const res = await apiClient.request(`/api/v1/contests/${slug}/enter`, {
     method: 'POST',
-    headers,
+    headers: { 'Content-Type': 'application/json' },
   });
-  if (!res.ok) throw new Error('Ошибка регистрации на соревнование');
-  return res.json();
+  if (!res.success) throw new Error(res.error?.message || 'Ошибка регистрации на соревнование');
+  return res.data;
 }
 
 export async function submitSolution(slug: string, file: File, comment?: string) {
@@ -49,7 +46,7 @@ export async function submitSolution(slug: string, file: File, comment?: string)
   formData.append('file', file);
   if (comment) formData.append('comment', comment);
   // Не добавляем Content-Type для FormData, браузер сам выставит boundary
-  const res = await fetch(`${API_URL}/contests/${slug}/submit`, {
+  const res = await fetch(`${API_URL}/api/v1/contests/${slug}/submit`, {
     method: 'POST',
     headers: authHeaders(),
     body: formData,

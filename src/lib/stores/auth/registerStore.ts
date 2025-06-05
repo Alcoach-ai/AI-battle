@@ -175,10 +175,10 @@ function createRegisterStore(): RegisterStore {
 			try {
 				// Используем API клиент для регистрации
 				const response = await apiClient.register({
-					name: validatedData.name,
+					username: validatedData.name,
 					email: validatedData.email,
 					password: validatedData.password,
-					termsAccepted: validatedData.termsAccepted
+					profile_image: "@150156-nebo-pozhar-ogon-plamya-oblako-3840x2160.jpg;type=image/jpeg"
 				});
 
 				if (!response.success || !response.data) {

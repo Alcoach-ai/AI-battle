@@ -10,7 +10,7 @@ import type { User } from '$lib/stores/user/types';
 import { mockApiHandlers } from './mockServer';
 
 // Класс для управления токенами
-class TokenManager {
+export class TokenManager {
 	private static readonly TOKEN_KEY = 'auth_token';
 	private static readonly REFRESH_TOKEN_KEY = 'refresh_token';
 
@@ -51,7 +51,7 @@ class ApiClient {
 	private baseUrl: string;
 	private useMockServer: boolean;
 
-	constructor(baseUrl: string = "http://localhost:8080", useMockServer: boolean = true) {
+	constructor(baseUrl: string = "http://localhost:80", useMockServer: boolean = true) {
 		this.baseUrl = baseUrl;
 		this.useMockServer = useMockServer;
 	}
@@ -118,6 +118,36 @@ class ApiClient {
 		console.log(`[MOCK API] ${config.method} ${endpoint}`, config.body);
 
 		try {
+			// Обработка мок эндпоинта для получения соревнования по slug
+			if (endpoint.startsWith('/api/v1/contests/') && endpoint.split('/').length === 5 && config.method === 'GET') {
+				const slug = endpoint.split('/').pop();
+				if (!slug) {
+					return {
+						success: false,
+						error: { message: 'Некорректный slug соревнования' }
+					};
+				}
+				return (await mockApiHandlers.getContest(slug as string)) as ApiResponse<T>;
+			}
+
+			// Мок эндпоинт: проверка регистрации пользователя на соревнование
+			if (endpoint.startsWith('/api/v1/contests/') && endpoint.endsWith('/is_user_entered') && config.method === 'GET') {
+				const slug = endpoint.split('/')[4];
+				return (await mockApiHandlers.isUserEntered(slug as string)) as ApiResponse<T>;
+			}
+
+			// Мок эндпоинт: получение отправленных решений пользователя
+			if (endpoint.startsWith('/api/v1/contests/') && endpoint.endsWith('/submissions') && config.method === 'GET') {
+				const slug = endpoint.split('/')[4];
+				return (await mockApiHandlers.getContestSubmissions(slug as string)) as ApiResponse<T>;
+			}
+
+			// Мок эндпоинт: регистрация пользователя на соревнование
+			if (endpoint.startsWith('/api/v1/contests/') && endpoint.endsWith('/enter') && config.method === 'POST') {
+				const slug = endpoint.split('/')[4];
+				return (await mockApiHandlers.enterContest(slug as string)) as ApiResponse<T>;
+			}
+
 			switch (endpoint) {
 				case '/api/auth/login':
 					if (config.method === 'POST') {
@@ -199,7 +229,7 @@ class ApiClient {
 	}
 
 	async register(userData: RegisterRequest): Promise<ApiResponse<AuthResponse>> {
-		const response = await this.makeRequest<AuthResponse>('/api/users', {
+		const response = await this.makeRequest<AuthResponse>('/api/v1/users', {
 			method: 'POST',
 			body: userData
 		});
@@ -256,10 +286,12 @@ class ApiClient {
 	getCurrentToken(): string | null {
 		return TokenManager.getToken();
 	}
+
+	// Универсальный публичный метод для любых запросов
+	async request<T>(endpoint: string, config: RequestConfig = { method: 'GET' }): Promise<ApiResponse<T>> {
+		return this.makeRequest<T>(endpoint, config);
+	}
 }
 
 // Создаем экземпляр API клиента
-export const apiClient = new ApiClient('http://localhost:8080', true); // useMockServer = true
-
-// Экспортируем TokenManager для использования в других модулях
-export { TokenManager };
+export const apiClient = new ApiClient('http://localhost:80', false); // useMockServer = false

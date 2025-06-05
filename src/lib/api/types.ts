@@ -7,10 +7,10 @@ export interface LoginRequest {
 }
 
 export interface RegisterRequest {
-	name: string;
+	username : string;
 	email: string;
 	password: string;
-	termsAccepted: boolean;
+	profile_image : string;
 }
 
 // Типы для API ответов

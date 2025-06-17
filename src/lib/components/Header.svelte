@@ -121,10 +121,13 @@
 		opacity: 0.7;
 	}
 
+<<<<<<< HEAD
 	body {
 		font-family: 'Poppins', sans-serif;
 	}
 
+=======
+>>>>>>> a4c496b54f85325d030f0f02faaeec4346fbb4b7
 	@media (max-width: 768px) {
 		.nav-links {
 			display: none;

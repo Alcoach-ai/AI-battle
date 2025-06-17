@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="600" height="400" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background Circle -->
+    <circle cx="300" cy="200" r="180" fill="#FFFFFF"/>
+    
+    <!-- Person 1 (Left) -->
+    <path d="M200 160 C200 120 240 120 240 160" stroke="#000000" stroke-width="3" fill="none"/> <!-- Hair -->
+    <circle cx="220" cy="180" r="30" fill="#4299E1"/> <!-- Head -->
+    <rect x="200" y="210" width="40" height="60" rx="10" fill="#4299E1"/> <!-- Body -->
+    <circle cx="210" cy="175" r="3" fill="#000000"/> <!-- Eye -->
+    <path d="M205 185 Q220 190 235 185" stroke="#000000" stroke-width="2" fill="none"/> <!-- Smile -->
+    <rect x="190" y="270" width="60" height="10" rx="5" fill="#4299E1"/> <!-- Legs -->
+    
+    <!-- Person 2 (Middle) -->
+    <circle cx="300" cy="190" r="35" fill="#63B3ED"/> <!-- Head -->
+    <rect x="275" y="225" width="50" height="70" rx="10" fill="#63B3ED"/> <!-- Body -->
+    <circle cx="290" cy="185" r="3" fill="#000000"/> <!-- Left Eye -->
+    <circle cx="310" cy="185" r="3" fill="#000000"/> <!-- Right Eye -->
+    <path d="M285 195 Q300 200 315 195" stroke="#000000" stroke-width="2" fill="none"/> <!-- Smile -->
+    
+    <!-- Person 3 (Right) -->
+    <path d="M360 170 C360 130 400 130 400 170" stroke="#000000" stroke-width="3" fill="none"/> <!-- Hair -->
+    <circle cx="380" cy="190" r="30" fill="#90CDF4"/> <!-- Head -->
+    <rect x="360" y="220" width="40" height="60" rx="10" fill="#90CDF4"/> <!-- Body -->
+    <circle cx="370" cy="185" r="3" fill="#000000"/> <!-- Left Eye -->
+    <circle cx="390" cy="185" r="3" fill="#000000"/> <!-- Right Eye -->
+    <path d="M365 195 Q380 200 395 195" stroke="#000000" stroke-width="2" fill="none"/> <!-- Smile -->
+    
+    <!-- Laptop -->
+    <rect x="270" y="280" width="60" height="40" rx="5" fill="#2D3748"/> <!-- Screen -->
+    <rect x="265" y="320" width="70" height="5" rx="2" fill="#2D3748"/> <!-- Base -->
+    
+    <!-- Thought Bubbles -->
+    <circle cx="420" cy="120" r="15" fill="#BEE3F8"/>
+    <circle cx="450" cy="90" r="10" fill="#BEE3F8"/>
+    <circle cx="470" cy="70" r="7" fill="#BEE3F8"/>
+    
+    <!-- Light Bulb -->
+    <circle cx="420" cy="120" r="8" fill="#F6E05E"/>
+    <path d="M420 112 L420 128 M412 120 L428 120" stroke="#F6E05E" stroke-width="2"/>
+</svg> 
